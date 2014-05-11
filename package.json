@@ -1,0 +1,28 @@
+{
+  "name": "TestApp",
+  "version": "0.0.0",
+  "description": "Combining Node Express Angular and Sequelize",
+  "main": "server.js",
+  "scripts": {
+    "test": "None"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Bondifrench"
+  },
+  "keywords": [
+    "NodeJS",
+    "ExpressJs",
+    "AngularJS",
+    "and",
+    "Postgres"
+  ],
+  "author": "Bondifrench",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.1.2",
+    "body-parser": "^1.1.1",
+    "jade": "^1.3.1",
+    "serve-favicon": "^2.0.0"
+  }
+}
