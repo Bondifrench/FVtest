@@ -1,8 +1,18 @@
 doctype html
 html(lang="en")
 	head
-		meta(charset='utf-8')
+		meta(charset='UTF-8')
+		meta(name='fragment', content='!')
+		base(href='/')
 		title Node Express Angular Example
+		link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')
 		link(rel='stylesheet', href='/css/syle.css')
-	body
-		h1 Jade - node template engine
+	body(ng-app='myApp')
+		include partials/header
+		div.container
+			div.jumbotron.text-center
+				h1 Home Page
+				p This page is a draft in progress
+		script(src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.15/angular.min.js')
+		script(src='//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js')
+		script(src='/js/app.js')
