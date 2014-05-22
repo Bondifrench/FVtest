@@ -30,19 +30,21 @@ html(lang="en")
 								div.form-group
 									input.form-control(type='text', autocomplete='off', placeholder="This is where your feed's url will appear" data-ng-model='url')
 					div.row
-						div.col-md-6
-							h4 {{NewsSourceTitle}}
+						div.col-md-6(ng-show='feeds.length > 0')
 							div.input-group(ng-show='feeds.length > 0')
 								span.input-group-addon.glyphicon.glyphicon-search
 								input.form-control(type='text', data-ng-model='filterText')
-							ul.unstyled
-								span.badge.badge-warning(ng-show='feeds.length > 0') {{(feeds | filter:filterText).length}} Items
-								li(ng-repeat='feed in feeds | filter:filterText')
-									h5
-										a(target='_blank', href='{{feed.link}}') {{feed.title}}
-									p.text-left(ng-bind-html='feed.description')
-									//p.text-left {{feed.mediaGroup}}
-									span.small {{feed.pubDate | date}}
+							span.badge.badge-warning(ng-show='feeds.length > 0') {{(feeds | filter:filterText).length}} Items
+							div(style='overflow-y:scroll; height: 400px')
+								table.table.table-striped.table-condensed.table-hover
+									tbody
+										tr(ng-repeat='feed in feeds | filter:filterText | limitTo: itemsPerPage')
+											td
+												h5
+													a(target='_blank', href='{{feed.link}}') {{feed.title}}
+												p.text-left(ng-bind-html='feed.description')
+												//p.text-left {{feed.mediaGroup}}
+												span.small {{feed.pubDate | date}}
 		script(src='//code.jquery.com/jquery-2.1.1.min.js')
 		script(src='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js')
 		script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js')

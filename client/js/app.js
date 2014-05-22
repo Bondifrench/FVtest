@@ -42,6 +42,7 @@ News.controller('GoogCtrl', ['$scope','YQLService', function($scope, Feed){
 		{Title: 'Seeking Alpha Long Ideas',
 		url: 'http://seekingalpha.com/tag/long-ideas.xml'}
 	];
+	$scope.itemsPerPage=10;
 	$scope.loadFeed = function (url, e) {
 		//e is just short for event, any variable can be put actually
 		//is used by jQuery
