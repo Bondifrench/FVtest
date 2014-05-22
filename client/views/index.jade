@@ -5,14 +5,50 @@ html(lang="en")
 		meta(name='fragment', content='!')
 		base(href='/')
 		title Node Express Angular Example
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
 		link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')
-		link(rel='stylesheet', href='/css/syle.css')
-	body(ng-app='myApp')
+		link(rel='stylesheet', href='./css/style.css')
+	body
 		include partials/header
 		div.container
 			div.jumbotron.text-center
 				h1 Home Page
 				p This page is a draft in progress
-		script(src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.15/angular.min.js')
-		script(src='//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js')
-		script(src='/js/app.js')
+		div.container(ng-app='myApp', ng-cloak)
+			div.container
+				div(ng-controller='GoogCtrl')
+					div.row
+						div.col-md-6
+							h4 Feed Reader using AngularJS
+							form.form-inline(role='form')
+								div.form-group
+									button.btn.btn-info.dropdown-toggle(type='button', data-toggle='dropdown') {{loadButtonText}}
+										span.caret
+									ul.dropdown-menu(role='menu')
+										li(ng-repeat='rss in RSSList')
+											a(href='#', ng-click="loadFeed(rss.url, $event);") {{rss.Title}}
+								div.form-group
+									input.form-control(type='text', autocomplete='off', placeholder="This is where your feed's url will appear" data-ng-model='url')
+					div.row
+						div.col-md-6
+							h4 {{NewsSourceTitle}}
+							div.input-group(ng-show='feeds.length > 0')
+								span.input-group-addon.glyphicon.glyphicon-search
+								input.form-control(type='text', data-ng-model='filterText')
+							ul.unstyled
+								span.badge.badge-warning(ng-show='feeds.length > 0') {{(feeds | filter:filterText).length}} Items
+								li(ng-repeat='feed in feeds | filter:filterText')
+									h5
+										a(target='_blank', href='{{feed.link}}') {{feed.title}}
+									p.text-left(ng-bind-html='feed.description')
+									//p.text-left {{feed.mediaGroup}}
+									span.small {{feed.pubDate | date}}
+		script(src='//code.jquery.com/jquery-2.1.1.min.js')
+		script(src='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js')
+		script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js')
+		script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-sanitize.js')
+		script(src='./js/app.js')
+		script.
+			(function ($) {
+
+				})(jQuery);

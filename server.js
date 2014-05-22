@@ -11,6 +11,7 @@ app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'client')));
 
 app.get("/", function (req, res) {
+	console.log(req.url + req.method);
 	res.render('index');	
 });
 
