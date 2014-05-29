@@ -1,11 +1,6 @@
 .navbar {
 	border-radius: 0;
 }
-.btn-lg,
-.input-lg,
-.input-group-lg>.form-control, 
-.input-group-lg>.input-group-addon, 
-.input-group-lg>.input-group-btn>.btn {
-  line-height: 1.2;
-  height: 46px;
+body {
+	padding: 52px
 }
