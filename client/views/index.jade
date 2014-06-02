@@ -10,15 +10,15 @@ html(lang="en")
 		link(rel='stylesheet', href='./css/style.css')
 	body(style='')
 		include partials/header
-		div.container-fluid
-			div.jumbotron.text-center
+		div.jumbotron
+			div.container.text-center
 				h1 Home Page
 				p This page is a draft in progress
-		div.container-fluid(ng-app='myApp', ng-cloak)
+		div.container-fluid(ng-app='myApp', ng-cloak, droppable='true')
 			div.container-fluid
 				div.row
-					div.col-md-6
-						div(ng-controller='NewsCtrl')
+					div.panel.panel-default.col-md-6(draggable='true')
+						div.panel-body(ng-controller='NewsCtrl')
 							h4 Feed Reader using AngularJS
 							form.form-inline(role='form')
 								div.input-group
@@ -38,33 +38,46 @@ html(lang="en")
 								input.form-control(type='text', data-ng-model='filterText')
 							span.badge.badge-warning(ng-show='feeds.length > 0') {{(feeds | filter:filterText).length}} Items
 							div(style='overflow-y:auto; height: 400px')
+								div.list-group(ng-repeat='feed in feeds | filter:filterText | limitTo: itemsPerPage')
+									a.list-group-item(target='_blank', href='{{feed.link}}')
+										h4.list-group-item-heading {{feed.title}}
+										p.list-group-item-text.text-left(ng-bind-html='feed.description')
+										//p.text-left {{feed.mediaGroup}}
+										span.small {{feed.pubDate | date}}
+					div.panel.panel-default.col-md-6(draggable='true')
+						div.panel-body(ng-controller='StockCtrl')
+							h4 Stock Quote Module
+								button.btn.btn-info.pull-right(data-toggle='modal', data-target='#testModal') Settings
+								div.modal.fade#testModal(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+									div.modal-dialog
+										div.modal-content
+											div.modal-header
+												button.close(type='button', data-dismiss='modal', aria-hidden='true') &times;
+												h4.modal-title#myModalLabel Choose a ticker
+											div.modal-body
+												input(type='text', data-ng-model='ticker', ng-change='change()')
+											div.modal-footer
+												button.btn.btn-default(type='button', data-dismiss='modal') Close
+												button.btn.btn-info(type='button') Submit changes
+							br
+							p Ticker chosen is: {{ticker}}
+							div(style='overflow-y:scroll; height: 400px')
 								table.table.table-striped.table-condensed.table-hover
+									thead
+										tr
+											th Key
+											th Value
 									tbody
-										tr(ng-repeat='feed in feeds | filter:filterText | limitTo: itemsPerPage')
-											td
-												h5
-													a(target='_blank', href='{{feed.link}}') {{feed.title}}
-												p.text-left(ng-bind-html='feed.description')
-												//p.text-left {{feed.mediaGroup}}
-												span.small {{feed.pubDate | date}}
-					div.col-md-6
-						div(ng-controller='StockCtrl')
-							h4 Another test module
-								div(style='overflow-y:scroll; height: 400px')
-									table.table.table-striped.table-condensed.table-hover
-										thead
-											tr
-												th Key
-												th Value
-										tbody
-											tr(ng-repeat='(key,value) in stocks')
-												td {{key}}
-												td.text-right {{value}}										
+										tr(ng-repeat='(key,value) in stocks')
+											td {{key}}
+											td.text-right {{value}}
 		script(src='//code.jquery.com/jquery-2.1.1.min.js')
 		script(src='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js')
 		script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js')
 		script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-sanitize.js')
 		script(src='./js/app.js')
+		script(src='./js/controllers.js')
+		script(src='./js/factories.js')
 		script.
 			(function ($) {
 				})(jQuery);

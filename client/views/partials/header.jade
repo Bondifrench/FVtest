@@ -1,11 +1,19 @@
 nav.navbar.navbar-default.navbar-fixed-top.navbar-inverse(role='navigation')
 	div.navbar-header
-		a(src='/home', class='navbar-brand') Home
+		button.navbar-toggle(type='button', data-toggle='collapse', data-target='#example-navbar-collapse')
+			span.sr-only Toggle navigation
+			span.icon-bar
+			span.icon-bar
+			span.icon-bar
+		a.active(src='/home', class='navbar-brand') Home
 	div
-		ul.nav.navbar-nav
-			li
-				a(src='/about') About
-			li
-				a(src='/login') Login
-			li
-				a(src='/register') Register
+		div.collapse.navbar-collapse#example-navbar-collapse
+			ul.nav.navbar-nav
+				li
+					a(src='/blog') Blog
+				li
+					a(src='/about') About
+				li
+					a(src='/login') Login
+				li
+					a(src='/register') Register
